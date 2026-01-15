@@ -24,3 +24,11 @@ export interface ServiceFeature {
   description: string;
   icon: string;
 }
+
+export interface Story {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+}
