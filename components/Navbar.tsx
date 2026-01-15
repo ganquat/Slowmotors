@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
   const navItems = [
     { label: 'Our Rides', id: 'our-rides' },
     { label: 'Philosophy', id: 'philosophy' },
-    { label: 'Services', id: 'services' },
+    { label: 'Holidays', id: 'itinerary' },
     { label: 'Stories', id: 'stories' },
     { label: 'Contact', id: 'contact' },
   ];
