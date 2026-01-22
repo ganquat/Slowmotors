@@ -14,11 +14,11 @@ interface TestimonialsProps {
 
 const Testimonials = ({ testimonials }: TestimonialsProps) => {
   return (
-    <section className="py-20 bg-primary/5">
+    <section className="py-32 bg-primary/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div className="text-center mb-16">
             <h4 className="text-primary font-bold uppercase tracking-widest mb-2">Reviews</h4>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-accent mb-4">RIDERS LOVE US</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-accent mb-4 leading-tight">RIDERS LOVE US</h2>
          </div>
 
          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

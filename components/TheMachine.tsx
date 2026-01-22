@@ -14,11 +14,11 @@ interface TheMachineProps {
 
 const TheMachine = ({ machines }: TheMachineProps) => {
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section className="py-32 bg-gray-900 text-white">
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h4 className="text-primary font-bold uppercase tracking-widest mb-2">Our Fleet</h4>
-                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">THE MACHINE</h2>
+                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4 leading-tight">THE MACHINE</h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
                     Robust, classic, and built for the Indian terrain. We ride the legendary Royal Enfield.
                 </p>

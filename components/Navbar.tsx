@@ -1,12 +1,39 @@
+"use client";
+
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
+
+interface LinkItem {
+    id: number;
+    url: string;
+    label: string;
+    isButton?: boolean;
+}
 
 interface NavbarProps {
     siteName?: string;
     logoUrl?: string;
+    links?: LinkItem[] | null;
 }
 
-const Navbar = ({ siteName, logoUrl }: NavbarProps) => {
+const DEFAULT_LINKS: LinkItem[] = [
+    { id: 1, url: '/tours', label: 'Tours' },
+    { id: 2, url: '/holidays', label: 'Holidays' },
+    { id: 3, url: '/about', label: 'About' },
+    { id: 4, url: '/blog', label: 'Blog' },
+    { id: 5, url: '/contact', label: 'Book Now', isButton: true },
+];
+
+const Navbar = ({ siteName, logoUrl, links }: NavbarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const menuLinks = links && links.length > 0 ? links : DEFAULT_LINKS;
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +41,7 @@ const Navbar = ({ siteName, logoUrl }: NavbarProps) => {
 
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="font-display font-bold text-2xl text-accent tracking-tighter">
+            <Link href="/" className="font-display font-bold text-2xl text-accent tracking-tighter z-50 relative">
                 {/* Use logo image if available, else text */}
                 SLOW<span className="text-primary">MOTORS</span>
             </Link>
@@ -22,30 +49,45 @@ const Navbar = ({ siteName, logoUrl }: NavbarProps) => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
-            <Link href="/tours" className="text-accent hover:text-primary font-medium text-sm uppercase tracking-wide transition-colors">
-                Tours
-            </Link>
-            <Link href="/holidays" className="text-accent hover:text-primary font-medium text-sm uppercase tracking-wide transition-colors">
-                Holidays
-            </Link>
-            <Link href="/about" className="text-accent hover:text-primary font-medium text-sm uppercase tracking-wide transition-colors">
-                About
-            </Link>
-            <Link href="/blog" className="text-accent hover:text-primary font-medium text-sm uppercase tracking-wide transition-colors">
-                Blog
-            </Link>
-            <Link href="/contact" className="bg-primary hover:bg-orange-600 text-white px-5 py-2 rounded-full font-bold text-sm uppercase tracking-wide transition-all transform hover:scale-105">
-                Book Now
-            </Link>
+            {menuLinks.map((link) => (
+                link.isButton ? (
+                    <Link key={link.id} href={link.url} className="bg-primary hover:bg-orange-600 text-white px-5 py-2 rounded-full font-bold text-sm uppercase tracking-wide transition-all transform hover:scale-105">
+                        {link.label}
+                    </Link>
+                ) : (
+                    <Link key={link.id} href={link.url} className="text-accent hover:text-primary font-medium text-sm uppercase tracking-wide transition-colors relative group">
+                        {link.label}
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </Link>
+                )
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button className="text-accent hover:text-primary focus:outline-none">
-              <Menu size={28} />
+            <button
+                onClick={toggleMenu}
+                className="text-accent hover:text-primary focus:outline-none z-50 relative"
+                aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 bg-background w-screen h-screen z-40 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8 pt-20 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            {menuLinks.map((link) => (
+                <Link
+                    key={link.id}
+                    href={link.url}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-2xl font-bold uppercase tracking-widest ${link.isButton ? 'text-primary' : 'text-accent hover:text-primary'}`}
+                >
+                    {link.label}
+                </Link>
+            ))}
       </div>
     </nav>
   );
