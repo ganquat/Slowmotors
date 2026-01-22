@@ -67,3 +67,13 @@ export async function getGalleryImages(limit = 12) {
         "filters[width][$gt]": "500"
     });
 }
+
+export async function getNavigationData() {
+    // Attempt to fetch navigation from global data or a specific navigation endpoint
+    // We try to get it from Global data first.
+    const globalData = await getGlobalData();
+    if (globalData && globalData.attributes && globalData.attributes.navigation) {
+        return globalData.attributes.navigation;
+    }
+    return null;
+}

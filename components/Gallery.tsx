@@ -7,10 +7,10 @@ const Gallery = async () => {
   const images = files ? files.filter((f: any) => !f.name.includes("Logo") && !f.name.includes("Icon")) : [];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
         <h4 className="text-primary font-bold uppercase tracking-widest mb-2">Our Area</h4>
-        <h2 className="text-4xl md:text-5xl font-display font-bold text-accent mb-4">RIDERS PARADISE</h2>
+        <h2 className="text-4xl md:text-5xl font-display font-bold text-accent mb-4 leading-tight">RIDERS PARADISE</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
              From Kochi to Goa, we&apos;ve mapped out the most scenic, soulful, and satisfying routes for any rider.
         </p>

@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Discover from '@/components/Discover';
@@ -58,8 +57,6 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen font-sans text-accent">
-      <Navbar siteName={globalData?.attributes?.siteName} />
-
       <Hero
         title={heroTitle}
         subtitle={heroSubtitle}
@@ -82,8 +79,6 @@ export default async function Home() {
       <TheMachine machines={machines} />
 
       <Testimonials testimonials={testimonials} />
-
-      <Footer />
     </main>
   );
 }

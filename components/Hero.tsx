@@ -30,10 +30,10 @@ const Hero = ({ title, subtitle, ctaText, imageUrl }: HeroProps) => {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto mt-16">
-        <h2 className="text-xl md:text-2xl font-medium tracking-[0.2em] mb-4 uppercase">
+        <h2 className="text-xl md:text-2xl font-medium tracking-[0.2em] mb-4 uppercase leading-relaxed">
             {subtitle}
         </h2>
-        <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-8">
+        <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-8 leading-tight">
             {title}
         </h1>
         

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getImageUrlByName } from '@/lib/strapi';
+import { getImageUrlByName, getNavigationData } from '@/lib/strapi';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat' });
@@ -19,11 +19,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const logoUrl = await getImageUrlByName('RE_Tours_Logo');
+  const links = await getNavigationData();
 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans antialiased bg-background text-accent">
-        <Navbar logoUrl={logoUrl} />
+        <Navbar logoUrl={logoUrl} links={links} />
         {children}
         <Footer />
       </body>
