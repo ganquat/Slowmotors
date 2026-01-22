@@ -1,44 +1,51 @@
-import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  imageUrl?: string | null;
+}
+
+const Hero = ({ title, subtitle, ctaText, imageUrl }: HeroProps) => {
+  // Fallback hardcoded if the specific image fetch failed in parent or returned null
+  const bgImage = imageUrl || "https://whimsical-badge-f41b91c26a.media.strapiapp.com/Enfield_Hero_cbc34cbc02.webp";
+
   return (
-    <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+    <div className="relative h-screen min-h-[600px] w-full flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOGfdEVD4__usxvd9UQwMO8HrAmuaE-rqpP8t-F7pndveuOrdsU03K3kQuFTWZzhHwjJzReXD2Nrz9_4KgO39-pML-ppzbGdK1X2fDJ2A6MuC2rO2HOHDY7g1NDFZ0Sya_nB6Jp7czKwU6lZU5PpVapbmmJDIlz4dKDdBDv1RqAm6pOJIlbxSffiIbjOJcwoP_BOSW6RHuARobdkTqYgiMQNVyUMHf0m-FPaSwokbHP_WDNlNjkVt4d0FPT1rKZU0XAKOBs97eNS8g" 
-          alt="Motorcycle on a road in India" 
-          className="w-full h-full object-cover brightness-[0.75] dark:brightness-[0.50]"
-        />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background-light/90 dark:from-background-dark/90 via-transparent to-transparent h-32 bottom-0 w-full" />
+         <Image
+            src={bgImage}
+            alt="Royal Enfield Motorcycle"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={90}
+         />
+         {/* Overlay */}
+         <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16 animate-fade-in-up">
-        <span className="block text-secondary font-display italic text-2xl md:text-3xl mb-4 tracking-wider">
-          slooow traveling
-        </span>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 drop-shadow-2xl leading-tight">
-          Time to let <br/>
-          impressions settle
+      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto mt-16">
+        <h2 className="text-xl md:text-2xl font-medium tracking-[0.2em] mb-4 uppercase">
+            {subtitle}
+        </h2>
+        <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-8">
+            {title}
         </h1>
-        <p className="text-xl md:text-2xl text-gray-100 font-light max-w-2xl mx-auto drop-shadow-lg mb-10 leading-relaxed">
-          We believe the journey matters just as much as the destination. Experience authentic India.
-        </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#our-rides" className="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-2">
-            Find Your Ride
-            <span className="material-icons-outlined text-sm">east</span>
-            </a>
-        </div>
+        <Link
+            href="/tours"
+            className="inline-block bg-primary hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 uppercase tracking-widest text-sm"
+        >
+            {ctaText}
+        </Link>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/80">
-        <span className="material-icons-outlined text-4xl">keyboard_double_arrow_down</span>
-      </div>
-    </section>
+    </div>
   );
 };
+
+export default Hero;
