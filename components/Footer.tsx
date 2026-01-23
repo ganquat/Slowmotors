@@ -13,10 +13,10 @@ interface FooterProps {
 
 const Footer = ({ links }: FooterProps) => {
   const exploreLinks = links || [
-      { id: 1, url: '/tours', label: 'Our Motorcycle Rides' },
-      { id: 2, url: '/holidays', label: 'Your Motorbike Holidays' },
-      { id: 3, url: '/about', label: 'About us / our Philosophy' },
-      { id: 4, url: '/blog', label: 'Slow Moto Stories' },
+      { id: 1, url: '/motorcycle-rides-india', label: 'Our Motorcycle Rides' },
+      { id: 2, url: '/motorbike-holidays-india', label: 'Your Motorbike Holidays' },
+      { id: 3, url: '/about-us-our-philosophy', label: 'About us / our Philosophy' },
+      { id: 4, url: '/slow-moto-stories', label: 'Slow Moto Stories' },
   ];
 
   return (
@@ -76,7 +76,7 @@ const Footer = ({ links }: FooterProps) => {
             <p>&copy; 2026 Slow Moto Tours. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
                 <Link href="/terms" className="hover:text-white transition-colors">Terms and Conditions</Link>
-                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
                 <Link href="/imprint" className="hover:text-white transition-colors">Imprint</Link>
             </div>
         </div>
