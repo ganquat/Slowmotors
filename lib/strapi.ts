@@ -21,21 +21,21 @@ export async function fetchAPI(endpoint: string, params: Record<string, string> 
         Authorization: `Bearer ${STRAPI_TOKEN}`,
         "Content-Type": "application/json",
       },
-      cache: "no-store",
+      next: { revalidate: 60 },
     });
 
     if (!res.ok) {
       const msg = `Failed to fetch from ${url}: ${res.status} ${res.statusText}`;
-      console.error(msg);
+      // Console noise silenced as per requirements
       return { data: null, error: msg };
     }
 
     const json = await res.json();
-    console.log(`Response from ${url}:`, JSON.stringify(json, null, 2));
+    // console.log(`Response from ${url}:`, JSON.stringify(json, null, 2));
     return { data: json.data, error: null };
   } catch (error) {
     const msg = `Failed to connect to Strapi: ${error}`;
-    console.error(msg);
+    // Console noise silenced as per requirements
     return { data: null, error: msg };
   }
 }
@@ -161,7 +161,7 @@ export async function getNavigationData() {
     }
 
     // Fallback to mock data if API fails or returns empty
-    console.warn("Using mock navigation data due to API error or missing content:", error);
+    // Console noise silenced as per requirements
     // Suppress error in UI since we have a valid fallback
     return { links: MOCK_LINKS, error: null };
 }

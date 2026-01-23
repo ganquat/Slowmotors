@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const logoUrl = await getImageUrlByName('RE_Tours_Logo');
+  const logoUrl = await getImageUrlByName('RE_Tours_Logo') || "https://slowmoto.tours/wp-content/uploads/Logo-SMT-2021-full.svg";
   const { links, error } = await getNavigationData();
 
   return (
