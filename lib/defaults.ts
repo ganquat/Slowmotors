@@ -1620,3 +1620,63 @@ We remain an independent operator and this partnership emphasises the quality an
 `
     },
 };
+
+export const DEFAULT_TOURS = [
+    {
+        id: 1,
+        title: "South India Highlights",
+        slug: "south-india-highlights",
+        duration: "14 Days",
+        distance: "1800 km",
+        groupSize: "Max 10",
+        price: "€ 3,290",
+        image: DEFAULT_IMAGES.southernIndia
+    },
+    {
+        id: 2,
+        title: "Himalayan Adventure",
+        slug: "himalayan-adventure",
+        duration: "12 Days",
+        distance: "1200 km",
+        groupSize: "Max 12",
+        price: "€ 2,890",
+        image: DEFAULT_IMAGES.himalayan
+    },
+    {
+        id: 3,
+        title: "Coastal Cruiser",
+        slug: "coastal-cruiser",
+        duration: "10 Days",
+        distance: "1500 km",
+        groupSize: "Max 8",
+        price: "€ 2,490",
+        image: DEFAULT_IMAGES.classic500
+    }
+];
+
+export const DEFAULT_POSTS = [
+    {
+        id: 1,
+        title: "Riding the Ghats: A Journey Above the Clouds",
+        slug: "riding-the-ghats",
+        date: "October 12, 2023",
+        excerpt: "The mist was rising from the valley as we ascended the winding roads of the Western Ghats...",
+        thumbnail: GALLERY_IMAGES[4].url
+    },
+    {
+        id: 2,
+        title: "Why We Ride Royal Enfields",
+        slug: "why-royal-enfields",
+        date: "September 28, 2023",
+        excerpt: "There is a rhythm to the thump of a 500cc single-cylinder engine that resonates with the soul of India...",
+        thumbnail: DEFAULT_IMAGES.classic500
+    },
+    {
+        id: 3,
+        title: "Encounters on the Road",
+        slug: "encounters-on-road",
+        date: "August 15, 2023",
+        excerpt: "It's the people you meet along the way that make the journey truly memorable. From chai wallahs to fellow travelers...",
+        thumbnail: DEFAULT_IMAGES.founders
+    }
+];
