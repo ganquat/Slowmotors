@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { DEFAULT_LINKS } from '@/lib/defaults';
 
 interface LinkItem {
     id: number;
@@ -17,14 +18,6 @@ interface NavbarProps {
     links?: LinkItem[] | null;
     error?: string | null;
 }
-
-const DEFAULT_LINKS: LinkItem[] = [
-    { id: 1, url: '/motorcycle-rides-india', label: 'Tours' },
-    { id: 2, url: '/motorbike-holidays-india', label: 'Holidays' },
-    { id: 3, url: '/about-us-our-philosophy', label: 'About' },
-    { id: 4, url: '/slow-moto-stories', label: 'Blog' },
-    { id: 5, url: '/contact', label: 'Book Now', isButton: true },
-];
 
 const Navbar = ({ siteName, logoUrl, links, error }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
