@@ -1,4 +1,4 @@
-import { DEFAULT_TESTIMONIALS, DEFAULT_MACHINES, DEFAULT_LINKS, DEFAULT_PAGES } from '@/lib/defaults';
+import { DEFAULT_TESTIMONIALS, DEFAULT_MACHINES, DEFAULT_LINKS, DEFAULT_PAGES, DEFAULT_TOURS, DEFAULT_POSTS } from '@/lib/defaults';
 
 let STRAPI_URL = process.env.STRAPI_API_URL || "https://whimsical-badge-f41b91c26a.strapiapp.com/api";
 if (!STRAPI_URL.endsWith('/api')) {
@@ -102,7 +102,28 @@ export async function getToursData() {
     const { data } = await fetchAPI("/tours", {
         populate: "*"
     });
-    return data;
+
+    if (data && data.length > 0) {
+        return data;
+    }
+
+    console.log("Using fallback content for tours list");
+    return DEFAULT_TOURS;
+}
+
+export async function getPostsData() {
+    const { data } = await fetchAPI("/posts", {
+        "sort": "date:desc",
+        populate: "*"
+    });
+
+    if (data && data.length > 0) {
+        return data;
+    }
+
+    // Fallback
+    console.log("Using fallback content for posts");
+    return DEFAULT_POSTS;
 }
 
 export async function getTourData(slug: string) {
