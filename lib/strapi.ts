@@ -74,6 +74,14 @@ export async function getGalleryImages(limit = 12) {
 }
 
 export async function getNavigationData() {
+    const MOCK_LINKS = [
+        { id: 1, url: '/', label: 'Home' },
+        { id: 2, url: '/tours', label: 'Our Motorcycle Rides' },
+        { id: 3, url: '/holidays', label: 'Your Motorbike Holidays' },
+        { id: 4, url: '/about', label: 'About Us' },
+        { id: 5, url: '/blog', label: 'Slow Moto Stories' },
+    ];
+
     // Attempt to fetch navigation from a specific navigation endpoint
     // Strapi v4 requires explicit population for nested components
     const { data: navData, error } = await fetchAPI("/navigation", {
@@ -90,5 +98,7 @@ export async function getNavigationData() {
         return { links, error: null };
     }
 
-    return { links: null, error: error || "No navigation data found" };
+    // Fallback to mock data if API fails or returns empty
+    console.warn("Using mock navigation data due to API error or missing content:", error);
+    return { links: MOCK_LINKS, error: error };
 }
