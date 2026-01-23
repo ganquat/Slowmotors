@@ -1,4 +1,4 @@
-import { DEFAULT_TESTIMONIALS, DEFAULT_MACHINES } from '@/lib/defaults';
+import { DEFAULT_TESTIMONIALS, DEFAULT_MACHINES, DEFAULT_LINKS, DEFAULT_PAGES } from '@/lib/defaults';
 
 let STRAPI_URL = process.env.STRAPI_API_URL || "https://whimsical-badge-f41b91c26a.strapiapp.com/api";
 if (!STRAPI_URL.endsWith('/api')) {
@@ -81,7 +81,21 @@ export async function getPagesData(slug: string) {
         "filters[slug][$eq]": slug,
         populate: "*"
     });
-    return data && data.length > 0 ? data[0] : null;
+
+    if (data && data.length > 0) {
+        return data[0];
+    }
+
+    // Fallback
+    if (DEFAULT_PAGES[slug]) {
+        console.log(`Using fallback content for page: ${slug}`);
+        return {
+            title: DEFAULT_PAGES[slug].title,
+            content: DEFAULT_PAGES[slug].content
+        };
+    }
+
+    return null;
 }
 
 export async function getToursData() {
@@ -136,14 +150,6 @@ export async function getMachinesData() {
 }
 
 export async function getNavigationData() {
-    const MOCK_LINKS = [
-        { id: 1, url: '/', label: 'Home' },
-        { id: 2, url: '/motorcycle-rides-india', label: 'Our Motorcycle Rides' },
-        { id: 3, url: '/motorbike-holidays-india', label: 'Your Motorbike Holidays' },
-        { id: 4, url: '/about-us-our-philosophy', label: 'About Us' },
-        { id: 5, url: '/slow-moto-stories', label: 'Slow Moto Stories' },
-    ];
-
     // Attempt to fetch navigation from a specific navigation endpoint
     // Strapi v4 requires explicit population for nested components
     const { data: navData, error } = await fetchAPI("/navigation", {
@@ -163,5 +169,5 @@ export async function getNavigationData() {
     // Fallback to mock data if API fails or returns empty
     // Console noise silenced as per requirements
     // Suppress error in UI since we have a valid fallback
-    return { links: MOCK_LINKS, error: null };
+    return { links: DEFAULT_LINKS, error: null };
 }

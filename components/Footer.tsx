@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { DEFAULT_LINKS } from '@/lib/defaults';
 
 interface LinkItem {
     id: number;
     url: string;
     label: string;
+    isButton?: boolean;
 }
 
 interface FooterProps {
@@ -12,12 +14,7 @@ interface FooterProps {
 }
 
 const Footer = ({ links }: FooterProps) => {
-  const exploreLinks = links || [
-      { id: 1, url: '/motorcycle-rides-india', label: 'Our Motorcycle Rides' },
-      { id: 2, url: '/motorbike-holidays-india', label: 'Your Motorbike Holidays' },
-      { id: 3, url: '/about-us-our-philosophy', label: 'About us / our Philosophy' },
-      { id: 4, url: '/slow-moto-stories', label: 'Slow Moto Stories' },
-  ];
+  const exploreLinks = (links && links.length > 0 ? links : DEFAULT_LINKS).filter(link => !link.isButton);
 
   return (
     <footer className="bg-accent text-white py-16">

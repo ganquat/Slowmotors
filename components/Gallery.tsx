@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import { getGalleryImages } from '@/lib/strapi';
+import { GALLERY_IMAGES } from '@/lib/defaults';
 
 const Gallery = async () => {
   const files = await getGalleryImages();
 
-  const images = files ? files.filter((f: any) => !f.name.includes("Logo") && !f.name.includes("Icon")) : [];
+  let images = files ? files.filter((f: any) => !f.name.includes("Logo") && !f.name.includes("Icon")) : [];
+
+  if (images.length === 0) {
+    images = GALLERY_IMAGES;
+  }
 
   return (
     <section className="py-32 bg-white">

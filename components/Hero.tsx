@@ -30,17 +30,17 @@ const Hero = ({ title, subtitle, ctaText, imageUrl }: HeroProps) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto mt-16">
-        <h2 className="text-xl md:text-2xl font-display font-medium tracking-[0.2em] mb-4 uppercase leading-relaxed">
+      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-16">
+        <h2 className="text-lg md:text-xl font-display font-medium tracking-[0.2em] mb-6 uppercase leading-relaxed text-gray-200">
             {subtitle}
         </h2>
-        <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-8 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-bold font-display tracking-tight mb-10 leading-tight drop-shadow-lg">
             {title}
         </h1>
         
         <Link
-            href="/tours"
-            className="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:-translate-y-1 hover:shadow-lg uppercase tracking-widest text-sm"
+            href="/motorcycle-rides-india"
+            className="inline-block bg-primary hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:-translate-y-1 hover:shadow-xl uppercase tracking-widest text-sm border-2 border-transparent hover:border-white/20"
         >
             {ctaText}
         </Link>
