@@ -19,10 +19,10 @@ interface NavbarProps {
 }
 
 const DEFAULT_LINKS: LinkItem[] = [
-    { id: 1, url: '/tours', label: 'Tours' },
-    { id: 2, url: '/holidays', label: 'Holidays' },
-    { id: 3, url: '/about', label: 'About' },
-    { id: 4, url: '/blog', label: 'Blog' },
+    { id: 1, url: '/motorcycle-rides-india', label: 'Tours' },
+    { id: 2, url: '/motorbike-holidays-india', label: 'Holidays' },
+    { id: 3, url: '/about-us-our-philosophy', label: 'About' },
+    { id: 4, url: '/slow-moto-stories', label: 'Blog' },
     { id: 5, url: '/contact', label: 'Book Now', isButton: true },
 ];
 
