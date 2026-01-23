@@ -4,10 +4,9 @@ import Discover from '@/components/Discover';
 import Gallery from '@/components/Gallery';
 import TheMachine from '@/components/TheMachine';
 import Testimonials from '@/components/Testimonials';
-import Footer from '@/components/Footer';
 
 // Data Fetching
-import { getGlobalData, getHomePageData, getImageUrlByName } from '@/lib/strapi';
+import { getGlobalData, getHomePageData, getImageUrlByName, getTestimonialsData, getMachinesData } from '@/lib/strapi';
 import {
     DEFAULT_HERO,
     DEFAULT_FEATURES,
@@ -22,19 +21,24 @@ export default async function Home() {
     globalData,
     homePageData,
     heroImage,
-    foundersImage
+    foundersImage,
+    testimonialsData,
+    machinesData
   ] = await Promise.all([
     getGlobalData(),
     getHomePageData(),
     getImageUrlByName('Enfield_Hero'),
-    getImageUrlByName('Founders') // Trying to fetch founders image
+    getImageUrlByName('Founders'),
+    getTestimonialsData(),
+    getMachinesData()
   ]);
 
   // Logic to determine content (API > Default)
 
   // Hero
-  const heroTitle = homePageData?.attributes?.hero_title || DEFAULT_HERO.title; // Hypothetical field
-  const heroSubtitle = homePageData?.attributes?.hero_subtitle || DEFAULT_HERO.subtitle;
+  // Strapi v5 (or flattened v4) structure: fields are direct siblings of id
+  const heroTitle = homePageData?.hero_title || DEFAULT_HERO.title;
+  const heroSubtitle = homePageData?.hero_subtitle || DEFAULT_HERO.subtitle;
   const heroCta = DEFAULT_HERO.cta;
   const heroImgUrl = heroImage || null;
 
@@ -50,10 +54,10 @@ export default async function Home() {
   const foundersDesc = DEFAULT_DISCOVER.foundersDescription;
 
   // Testimonials
-  const testimonials = DEFAULT_TESTIMONIALS;
+  const testimonials = testimonialsData || DEFAULT_TESTIMONIALS;
 
   // Machines
-  const machines = DEFAULT_MACHINES;
+  const machines = machinesData || DEFAULT_MACHINES;
 
   return (
     <main className="min-h-screen font-sans text-accent">
