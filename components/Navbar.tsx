@@ -15,6 +15,7 @@ interface NavbarProps {
     siteName?: string;
     logoUrl?: string;
     links?: LinkItem[] | null;
+    error?: string | null;
 }
 
 const DEFAULT_LINKS: LinkItem[] = [
@@ -25,7 +26,7 @@ const DEFAULT_LINKS: LinkItem[] = [
     { id: 5, url: '/contact', label: 'Book Now', isButton: true },
 ];
 
-const Navbar = ({ siteName, logoUrl, links }: NavbarProps) => {
+const Navbar = ({ siteName, logoUrl, links, error }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuLinks = links && links.length > 0 ? links : DEFAULT_LINKS;
@@ -36,6 +37,11 @@ const Navbar = ({ siteName, logoUrl, links }: NavbarProps) => {
 
   return (
     <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+      {error && (
+        <div className="bg-red-500 text-white text-center py-2 px-4 text-sm font-medium z-50 relative">
+            {error}
+        </div>
+      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
 

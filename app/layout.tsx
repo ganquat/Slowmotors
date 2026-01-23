@@ -19,12 +19,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const logoUrl = await getImageUrlByName('RE_Tours_Logo');
-  const links = await getNavigationData();
+  const { links, error } = await getNavigationData();
 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans antialiased bg-background text-accent">
-        <Navbar logoUrl={logoUrl} links={links} />
+        <Navbar logoUrl={logoUrl} links={links} error={error} />
         {children}
         <Footer />
       </body>
