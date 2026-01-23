@@ -19,27 +19,31 @@ export async function fetchAPI(endpoint: string, params: Record<string, string> 
     });
 
     if (!res.ok) {
-      console.error(`Failed to fetch from ${url}: ${res.status} ${res.statusText}`);
-      return null;
+      const msg = `Failed to fetch from ${url}: ${res.status} ${res.statusText}`;
+      console.error(msg);
+      return { data: null, error: msg };
     }
 
     const json = await res.json();
-    return json.data;
+    console.log(`Response from ${url}:`, JSON.stringify(json, null, 2));
+    return { data: json.data, error: null };
   } catch (error) {
-    console.error(`Error fetching from ${url}:`, error);
-    return null;
+    const msg = `Failed to connect to Strapi: ${error}`;
+    console.error(msg);
+    return { data: null, error: msg };
   }
 }
 
 export async function getGlobalData() {
     // Attempt to fetch global settings (site name, SEO, etc.)
-    return await fetchAPI("/global", { populate: "*" });
+    const { data } = await fetchAPI("/global", { populate: "*" });
+    return data;
 }
 
 export async function getHomePageData() {
     // Attempt to fetch homepage specific data if it exists
     // We try looking for a page with slug 'home' or similar
-    const pages = await fetchAPI("/pages", {
+    const { data: pages } = await fetchAPI("/pages", {
         "filters[slug][$eq]": "home",
         populate: "*"
     });
@@ -48,7 +52,7 @@ export async function getHomePageData() {
 
 export async function getImageUrlByName(name: string) {
     // Helper to find an image by its name
-    const data = await fetchAPI("/upload/files", {
+    const { data } = await fetchAPI("/upload/files", {
         "filters[name][$contains]": name,
         "pagination[limit]": "1"
     });
@@ -60,20 +64,41 @@ export async function getImageUrlByName(name: string) {
 }
 
 export async function getGalleryImages(limit = 12) {
-    return await fetchAPI('/upload/files', {
+    const { data } = await fetchAPI('/upload/files', {
         "sort": "createdAt:desc",
         "pagination[limit]": limit.toString(),
         "filters[mime][$contains]": "image",
         "filters[width][$gt]": "500"
     });
+    return data;
 }
 
 export async function getNavigationData() {
-    // Attempt to fetch navigation from global data or a specific navigation endpoint
-    // We try to get it from Global data first.
-    const globalData = await getGlobalData();
-    if (globalData && globalData.attributes && globalData.attributes.navigation) {
-        return globalData.attributes.navigation;
+    const MOCK_LINKS = [
+        { id: 1, url: '/', label: 'Home' },
+        { id: 2, url: '/tours', label: 'Our Motorcycle Rides' },
+        { id: 3, url: '/holidays', label: 'Your Motorbike Holidays' },
+        { id: 4, url: '/about', label: 'About Us' },
+        { id: 5, url: '/blog', label: 'Slow Moto Stories' },
+    ];
+
+    // Attempt to fetch navigation from a specific navigation endpoint
+    // Strapi v4 requires explicit population for nested components
+    const { data: navData, error } = await fetchAPI("/navigation", {
+        "populate[menu_items][populate]": "*"
+    });
+
+    if (navData && navData.attributes && Array.isArray(navData.attributes.menu_items)) {
+        const links = navData.attributes.menu_items.map((item: any) => ({
+            id: item.id,
+            url: item.url,
+            label: item.label,
+            isButton: item.isButton || false
+        }));
+        return { links, error: null };
     }
-    return null;
+
+    // Fallback to mock data if API fails or returns empty
+    console.warn("Using mock navigation data due to API error or missing content:", error);
+    return { links: MOCK_LINKS, error: error };
 }
