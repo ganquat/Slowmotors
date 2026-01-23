@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { getStrapiMedia } from '@/lib/strapi';
+import { DEFAULT_IMAGES } from '@/lib/defaults';
 
 interface Machine {
     id: number;
@@ -30,8 +31,8 @@ const TheMachine = ({ machines }: TheMachineProps) => {
                     const imageUrl = machine.imageUrl
                         ? getStrapiMedia(machine.imageUrl)
                         : (machine.name.includes("Himalayan")
-                            ? "https://whimsical-badge-f41b91c26a.media.strapiapp.com/Himalayan_5330a6c026.webp"
-                            : "https://whimsical-badge-f41b91c26a.media.strapiapp.com/Classic_500_82570086c9.webp");
+                            ? DEFAULT_IMAGES.himalayan
+                            : DEFAULT_IMAGES.classic500);
 
                     return (
                         <div key={machine.id} className="bg-gray-800 rounded-lg overflow-hidden shadow-2xl group">

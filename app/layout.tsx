@@ -23,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
-      <body className="font-sans antialiased bg-background text-accent">
+      <body className="font-sans antialiased bg-background text-accent leading-relaxed">
         <Navbar logoUrl={logoUrl} links={links} error={error} />
         {children}
         <Footer links={links} />

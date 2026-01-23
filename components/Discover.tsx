@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { DEFAULT_IMAGES } from '@/lib/defaults';
 
 interface DiscoverProps {
     title: string;
@@ -9,7 +10,7 @@ interface DiscoverProps {
 }
 
 const Discover = ({ title, description, foundersTitle, foundersDescription, foundersImage }: DiscoverProps) => {
-  const imageSrc = foundersImage || "https://whimsical-badge-f41b91c26a.media.strapiapp.com/Founders_b6e7e45293.webp";
+  const imageSrc = foundersImage || DEFAULT_IMAGES.founders;
 
   return (
     <section className="py-32 bg-white overflow-hidden">
@@ -20,7 +21,7 @@ const Discover = ({ title, description, foundersTitle, foundersDescription, foun
             <div className="w-full md:w-1/2">
                 <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-xl">
                     <Image
-                        src="https://whimsical-badge-f41b91c26a.media.strapiapp.com/Southern_India_Map_429a365f5e.webp" // This could also be dynamic if needed, but keeping simple for now
+                        src={DEFAULT_IMAGES.southernIndia}
                         alt="Southern India Map"
                         fill
                         className="object-cover"
@@ -59,7 +60,7 @@ const Discover = ({ title, description, foundersTitle, foundersDescription, foun
                 <p className="text-gray-600 leading-relaxed text-lg mb-6 md:text-right">
                    {foundersDescription}
                 </p>
-                <div className="flex justify-end md:justify-end"> {/* Simplified alignment */}
+                <div className="flex justify-end md:justify-end">
                     <button className="text-primary font-bold uppercase tracking-wider text-sm border-b-2 border-primary pb-1 hover:text-orange-600 transition-colors">
                         Meet the Team
                     </button>

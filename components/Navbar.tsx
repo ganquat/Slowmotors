@@ -57,7 +57,7 @@ const Navbar = ({ siteName, logoUrl, links, error }: NavbarProps) => {
           <div className="hidden md:flex space-x-8 items-center">
             {menuLinks.map((link) => (
                 link.isButton ? (
-                    <Link key={link.id} href={link.url} className="bg-primary hover:bg-orange-600 text-white px-5 py-2 rounded-full font-bold text-sm uppercase tracking-wide transition-all transform hover:scale-105">
+                    <Link key={link.id} href={link.url} className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-bold text-sm uppercase tracking-wide transition-all transform hover:-translate-y-0.5 hover:shadow-md">
                         {link.label}
                     </Link>
                 ) : (

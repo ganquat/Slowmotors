@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#E05D26', // Deep Terracotta/Orange
-        background: '#FAFAFA', // Clean White/Light Cream
+        primary: '#E65A28', // Deep Terracotta/Orange
+        background: '#F9F9F7', // Clean White/Light Cream
         accent: '#333333', // Dark Charcoal
       },
       fontFamily: {
