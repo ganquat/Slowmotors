@@ -1,7 +1,24 @@
 import Link from 'next/link';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 
-const Footer = () => {
+interface LinkItem {
+    id: number;
+    url: string;
+    label: string;
+}
+
+interface FooterProps {
+    links?: LinkItem[] | null;
+}
+
+const Footer = ({ links }: FooterProps) => {
+  const exploreLinks = links || [
+      { id: 1, url: '/tours', label: 'Our Motorcycle Rides' },
+      { id: 2, url: '/holidays', label: 'Your Motorbike Holidays' },
+      { id: 3, url: '/about', label: 'About us / our Philosophy' },
+      { id: 4, url: '/blog', label: 'Slow Moto Stories' },
+  ];
+
   return (
     <footer className="bg-accent text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,10 +45,13 @@ const Footer = () => {
             <div>
                 <h3 className="text-lg font-bold font-display mb-6">Explore</h3>
                 <ul className="space-y-3">
-                    <li><Link href="/tours" className="text-gray-400 hover:text-white transition-colors">Our Motorcycle Rides</Link></li>
-                    <li><Link href="/holidays" className="text-gray-400 hover:text-white transition-colors">Your Motorbike Holidays</Link></li>
-                    <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About us / our Philosophy</Link></li>
-                    <li><Link href="/blog" className="text-gray-400 hover:text-white transition-colors">Slow Moto Stories</Link></li>
+                    {exploreLinks.map((link) => (
+                        <li key={link.id}>
+                            <Link href={link.url} className="text-gray-400 hover:text-white transition-colors">
+                                {link.label}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
 

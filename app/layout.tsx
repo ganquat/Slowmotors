@@ -26,7 +26,7 @@ export default async function RootLayout({
       <body className="font-sans antialiased bg-background text-accent">
         <Navbar logoUrl={logoUrl} links={links} error={error} />
         {children}
-        <Footer />
+        <Footer links={links} />
       </body>
     </html>
   );
