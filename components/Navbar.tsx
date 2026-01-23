@@ -48,8 +48,11 @@ const Navbar = ({ siteName, logoUrl, links, error }: NavbarProps) => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="font-display font-bold text-2xl text-accent tracking-tighter z-50 relative">
-                {/* Use logo image if available, else text */}
-                SLOW<span className="text-primary">MOTORS</span>
+                {logoUrl ? (
+                    <img src={logoUrl} alt="Slow Moto Tours" className="h-12 w-auto" />
+                ) : (
+                    <>SLOW<span className="text-primary">MOTORS</span></>
+                )}
             </Link>
           </div>
 
