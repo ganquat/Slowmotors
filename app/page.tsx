@@ -34,17 +34,17 @@ export default async function Home() {
   ]);
 
   // Logic to determine content (API > Default)
+  // Handling Strapi v4 structure where data is nested in 'attributes'
+  const attributes = homePageData?.attributes || homePageData || {};
 
   // Hero
-  // Strapi v5 (or flattened v4) structure: fields are direct siblings of id
-  const heroTitle = homePageData?.hero_title || DEFAULT_HERO.title;
-  const heroSubtitle = homePageData?.hero_subtitle || DEFAULT_HERO.subtitle;
-  const heroCta = DEFAULT_HERO.cta;
+  // We check for the specific fields, falling back to defaults if missing or empty
+  const heroTitle = attributes.hero_title || DEFAULT_HERO.title;
+  const heroSubtitle = attributes.hero_subtitle || DEFAULT_HERO.subtitle;
+  const heroCta = attributes.hero_cta || DEFAULT_HERO.cta;
   const heroImgUrl = heroImage || null;
 
   // Features
-  // Since structured features aren't easily available in the current schema (Elementor blobs),
-  // we stick to defaults but this block demonstrates where we'd map API data.
   const features = DEFAULT_FEATURES;
 
   // Discover
@@ -68,21 +68,31 @@ export default async function Home() {
         imageUrl={heroImgUrl}
       />
 
-      <Features features={features} />
+      <div className="py-20 md:py-24">
+        <Features features={features} />
+      </div>
 
-      <Discover
-        title={discoverTitle}
-        description={discoverDesc}
-        foundersTitle={foundersTitle}
-        foundersDescription={foundersDesc}
-        foundersImage={foundersImage}
-      />
+      <div className="py-20 md:py-24">
+        <Discover
+            title={discoverTitle}
+            description={discoverDesc}
+            foundersTitle={foundersTitle}
+            foundersDescription={foundersDesc}
+            foundersImage={foundersImage}
+        />
+      </div>
 
-      <Gallery />
+      <div className="py-20 md:py-24">
+        <Gallery />
+      </div>
 
-      <TheMachine machines={machines} />
+      <div className="py-20 md:py-24">
+        <TheMachine machines={machines} />
+      </div>
 
-      <Testimonials testimonials={testimonials} />
+      <div className="py-20 md:py-24">
+        <Testimonials testimonials={testimonials} />
+      </div>
     </main>
   );
 }

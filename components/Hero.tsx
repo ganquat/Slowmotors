@@ -25,22 +25,22 @@ const Hero = ({ title, subtitle, ctaText, imageUrl }: HeroProps) => {
             priority
             quality={90}
          />
-         {/* Overlay */}
-         <div className="absolute inset-0 bg-black/30" />
+         {/* Overlay - adjusting opacity to ensure text readability while keeping image visible */}
+         <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-16">
-        <h2 className="text-lg md:text-xl font-display font-medium tracking-[0.2em] mb-6 uppercase leading-relaxed text-gray-200">
+      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-20">
+        <h2 className="text-sm md:text-base font-display font-medium tracking-[0.2em] mb-4 uppercase text-gray-100">
             {subtitle}
         </h2>
-        <h1 className="text-4xl md:text-6xl font-bold font-display tracking-tight mb-10 leading-tight drop-shadow-lg">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight mb-12 leading-tight drop-shadow-xl max-w-4xl mx-auto">
             {title}
         </h1>
         
         <Link
             href="/motorcycle-rides-india"
-            className="inline-block bg-primary hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:-translate-y-1 hover:shadow-xl uppercase tracking-widest text-sm border-2 border-transparent hover:border-white/20"
+            className="inline-block bg-primary hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:-translate-y-1 hover:shadow-xl uppercase tracking-widest text-xs md:text-sm border-2 border-transparent"
         >
             {ctaText}
         </Link>
