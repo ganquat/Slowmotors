@@ -17,6 +17,7 @@ import {
 
 export default async function Home() {
   // Parallel Data Fetching
+  // If USE_CMS_DATA is false, these functions return null immediately (see lib/strapi.ts)
   const [
     globalData,
     homePageData,
@@ -35,10 +36,12 @@ export default async function Home() {
 
   // Logic to determine content (API > Default)
   // Handling Strapi v4 structure where data is nested in 'attributes'
+  // If homePageData is null (flag off or API error), attributes becomes {}
   const attributes = homePageData?.attributes || homePageData || {};
 
   // Hero
   // We check for the specific fields, falling back to defaults if missing or empty
+  // This serves as the "Hardcoded Mode" when API returns null
   const heroTitle = attributes.hero_title || DEFAULT_HERO.title;
   const heroSubtitle = attributes.hero_subtitle || DEFAULT_HERO.subtitle;
   const heroCta = attributes.hero_cta || DEFAULT_HERO.cta;
